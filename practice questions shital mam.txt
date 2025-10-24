@@ -1,0 +1,405 @@
+Q1.Wap enter an array and find the sum and count of element present at even position.
+
+Q2.Wap enter an array and find the sum and count of odd element .
+
+Q3. WAP to replace all the 0’s with 1’s in your array. Your array is [26, 0, 67, 45, 0, 78, 
+    54, 34, 10, 0, 34] 
+
+
+Q4.Wap enter an array and search any particular element and find the count.
+
+Q5.WAP to check if an array of integers contains two specified elements. 
+
+Q6.Wap enter an array and find the duplicate element and also count of that.
+
+Q7.Wap enter an array and print the square of the element which is on odd position.
+
+Q8.Wap enter an array and print the  square of the element which is on even position.
+
+Q9. WAP to replace all negative value with its immediate left elements square. Means 
+     arr[] = [12, 3, -19, 29, 5, -61, 44, 7, -9] 
+     Output array will be [12, 3, 9, 29, 5, 25, 44, 7, 49]. 
+
+Q10.Wap enter an array and print it in reverse order.
+
+Q11.Wap enter an array and find the no in array  which is equal to the sum of 1st and last element.
+
+1. Write a Java program to find all prime numbers between two given numbers and calculate their sum.
+
+2. WAP to check the prime number if the number is prime find the sum of that number. 
+
+3. Create a Java program to find the largest prime palindrome within a given range and calculate the product of its digits.
+
+4. Write a Java program to find the factorial of a given number and calculate the sum of its digits.
+
+5. Implement a Java program to check if a given number is a perfect number and calculate the sum of its divisors.
+
+6. Create a Java program to generate the Fibonacci series up to a given number and calculate the sum of the even-valued terms.
+
+8. Implement a Java program to find the largest prime factor of a given number and calculate the sum of its digits.
+
+9. Write a Java program to check if a given number is a palindrome and calculate the sum of its digits.
+
+10. Implement a Java program to find the GCD (Greatest Common Divisor) of two numbers and calculate the product of their digits.
+
+11. Create a Java program to generate the first N prime numbers and calculate the sum of their squares.
+
+
+13. Implement a Java program to find the sum of all prime numbers within a given range and calculate the product of their digits.
+https://ladakibahin.maharashtra.gov.in
+
+https://ladakibahin.maharashtra.gov.in/ekyc
+692155193761
+
+
+
+JavaScript
+Got it 👍 You want **JavaScript coding problems** that are often asked in interviews.
+I’ll give you a **set of problems (simple → tricky → advanced)** so you can practice.
+
+---
+
+# 🌱 **Beginner Problems**
+
+1. **Reverse a string** without using built-in `reverse()` method.
+2. **Check palindrome** (e.g., `"madam"` → true).
+3. **Find factorial** of a number using recursion.
+4. **Find largest element** in an array.
+5. **Count vowels** in a string.
+
+---
+
+# 🌿 **Intermediate Problems**
+
+6. **Fibonacci sequence** (print first `n` numbers).
+7. **Remove duplicates** from an array.
+8. **Find second largest number** in an array.
+9. **Check anagram** (e.g., `"listen"` and `"silent"` → true).
+10. **Flatten a nested array** (e.g., `[1, [2, [3, 4]], 5]` → `[1,2,3,4,5]`).
+
+---
+
+# 🌳 **Advanced Problems**
+
+11. **Implement debounce function** (for optimizing API calls).
+12. **Implement throttle function** (control function execution rate).
+13. **Custom Promise.all** implementation.
+14. **Deep clone an object** without using `JSON.parse(JSON.stringify())`.
+15. **LRU Cache** implementation using Map.
+
+---
+
+# ⚡ Example Question with Answer
+
+### Q: Reverse words in a sentence
+
+**Input:** `"Hello World from JS"`
+**Output:** `"olleH dlroW morf SJ"`
+
+**Answer:**
+
+```js
+function reverseString(str) {
+    return str.split("").reverse().join("");
+}
+
+function reverseWords(sentence) {
+    return sentence
+        .split(" ")
+        .map(word => reverseString(word))
+        .join(" ");
+}
+
+console.log(reverseWords("Hello World from JS"));
+```
+
+👉 Output:
+
+```
+olleH dlroW morf SJ
+```
+
+---
+
+Do you want me to **give solutions for all these 15 problems** step by step, or should I prepare a **mock interview round (questions only, you solve, then I review your answers)**?
+
+Got it 👍 You’ve uploaded two images showing **Set A** questions for **Java**, **JavaScript**, and **SQL**.
+Let’s go through **all the answers one by one clearly** 👇
+
+---
+
+## 🟩 **JAVA**
+
+### **1️⃣ Find the Longest Substring Without Repeating Characters**
+
+**Code:**
+
+```java
+import java.util.*;
+
+class LongestSubstring {
+    public static int lengthOfLongestSubstring(String s) {
+        int maxLen = 0;
+        int start = 0;
+        HashMap<Character, Integer> map = new HashMap<>();
+        for (int end = 0; end < s.length(); end++) {
+            char ch = s.charAt(end);
+            if (map.containsKey(ch)) {
+                start = Math.max(map.get(ch) + 1, start);
+            }
+            map.put(ch, end);
+            maxLen = Math.max(maxLen, end - start + 1);
+        }
+        return maxLen;
+    }
+
+    public static void main(String[] args) {
+        String s = "anviaj";
+        System.out.println(lengthOfLongestSubstring(s));
+    }
+}
+```
+
+**Output:**
+
+```
+5
+```
+
+---
+
+### **2️⃣ Given an array of integers, find:**
+
+a. Sum of all numbers
+b. Sum of all prime numbers
+c. Sum of all non-prime numbers
+
+**Code:**
+
+```java
+class ArraySum {
+    public static boolean isPrime(int n) {
+        if (n <= 1) return false;
+        for (int i = 2; i <= n / 2; i++) {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {2, 3, 4, 5, 6, 7, 8, 9};
+        int sumAll = 0, sumPrime = 0, sumNonPrime = 0;
+
+        for (int n : arr) {
+            sumAll += n;
+            if (isPrime(n))
+                sumPrime += n;
+            else
+                sumNonPrime += n;
+        }
+
+        System.out.println("Sum of all numbers = " + sumAll);
+        System.out.println("Sum of prime numbers = " + sumPrime);
+        System.out.println("Sum of non-prime numbers = " + sumNonPrime);
+    }
+}
+```
+
+**Output:**
+
+```
+Sum of all numbers = 44
+Sum of prime numbers = 17
+Sum of non-prime numbers = 27
+```
+
+---
+
+## 🟨 **JAVASCRIPT**
+
+### **1️⃣**
+
+```javascript
+const fruits = ["apple", "banana", "grapes"];
+const result = fruits.map(fruit => fruit + " fruit");
+console.log(result);
+```
+
+✅ **Output:** `["apple fruit", "banana fruit", "grapes fruit"]`
+
+---
+
+### **2️⃣**
+
+```javascript
+const users = [
+  { name: "Alice", active: true },
+  { name: "Bob", active: false }
+];
+
+const activeUsers = users.filter(user => user.active);
+console.log(activeUsers);
+```
+
+✅ **Output:** `[ { name: "Alice", active: true } ]`
+
+---
+
+### **3️⃣**
+
+```javascript
+const arr = [1, 2, 2, 3, 4, 4, 5];
+const uniqueArr = [...new Set(arr)];
+console.log(uniqueArr);
+```
+
+✅ **Output:** `[1, 2, 3, 4, 5]`
+
+---
+
+### **4️⃣**
+
+```javascript
+const sentences = ["I love JS", "JS is fun"];
+const updated = sentences.map(str => str.replace(/JS/g, "JavaScript"));
+console.log(updated);
+```
+
+✅ **Output:** `["I love JavaScript", "JavaScript is fun"]`
+
+---
+
+### **5️⃣**
+
+```javascript
+const arr = [0, 1, false, 2, "", 3, null, 4];
+const truthyArr = arr.filter(Boolean);
+console.log(truthyArr);
+```
+
+✅ **Output:** `[1, 2, 3, 4]`
+
+---
+
+## 🟦 **SQL**
+
+### **1️⃣ CREATE TABLE**
+
+```sql
+CREATE TABLE Employees (
+    emp_id INT AUTO_INCREMENT PRIMARY KEY,
+    emp_name VARCHAR(64),
+    department VARCHAR(50),
+    hire_date DATE
+);
+
+CREATE TABLE Salaries (
+    salary_id INT AUTO_INCREMENT PRIMARY KEY,
+    emp_id INT,
+    salary DECIMAL(10,2),
+    effective_from DATE,
+    FOREIGN KEY (emp_id) REFERENCES Employees(emp_id)
+);
+```
+
+---
+
+### **2️⃣ INSERT statements**
+
+```sql
+INSERT INTO Employees (emp_name, department, hire_date)
+VALUES ('Davy Jones', 'Support', '2025-09-30');
+
+INSERT INTO Salaries (emp_id, salary, effective_from)
+VALUES (6, 2000, '2025-09-30');
+```
+
+---
+
+### **3️⃣ Employees in IT department**
+
+```sql
+SELECT e.emp_name, e.department, s.salary
+FROM Employees e
+JOIN Salaries s ON e.emp_id = s.emp_id
+WHERE e.department = 'IT';
+```
+
+---
+
+### **4️⃣ Average salary in each department**
+
+```sql
+SELECT e.department, AVG(s.salary) AS avg_salary
+FROM Employees e
+JOIN Salaries s ON e.emp_id = s.emp_id
+GROUP BY e.department;
+```
+
+---
+
+### **5️⃣ Increase salary by 10% for HR employees**
+
+```sql
+UPDATE Salaries s
+JOIN Employees e ON s.emp_id = e.emp_id
+SET s.salary = s.salary * 1.10
+WHERE e.department = 'HR';
+```
+
+---
+
+### **6️⃣ Add new column Email**
+
+```sql
+ALTER TABLE Employees
+ADD COLUMN Email VARCHAR(100);
+```
+
+---
+
+### **7️⃣ Modify emp_name column size**
+
+```sql
+ALTER TABLE Employees
+MODIFY emp_name VARCHAR(128);
+```
+
+---
+
+### **8️⃣ Find employees whose salary > average salary**
+
+```sql
+SELECT e.emp_name, s.salary
+FROM Employees e
+JOIN Salaries s ON e.emp_id = s.emp_id
+WHERE s.salary > (SELECT AVG(salary) FROM Salaries);
+```
+
+---
+
+### **9️⃣ Categorize employees by salary**
+
+```sql
+SELECT e.emp_name,
+       CASE
+           WHEN s.salary < 5000 THEN 'Low'
+           WHEN s.salary BETWEEN 5000 AND 6500 THEN 'Medium'
+           ELSE 'High'
+       END AS salary_category
+FROM Employees e
+JOIN Salaries s ON e.emp_id = s.emp_id;
+```
+
+---
+
+### **🔟 Delete Carol Lee safely**
+
+```sql
+DELETE FROM Salaries WHERE emp_id = (SELECT emp_id FROM Employees WHERE emp_name = 'Carol Lee');
+DELETE FROM Employees WHERE emp_name = 'Carol Lee';
+```
+
+---
+
+Would you like me to make a **single printable answer sheet (PDF)** with all of these neatly formatted?

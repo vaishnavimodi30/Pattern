@@ -1,0 +1,1509 @@
+Name : Vaishnavi Modi
+//1. Create a class Vehicle with a method startEngine(). Extend it into Car and Bike. Inside Car, use this to call a helper method, and super to call parent’s startEngine(). Show method overriding.
+
+class Vehicle {
+    void startEngine() {
+        System.out.println("Vehicle engine");
+    }
+}
+class Car extends Vehicle {
+    
+    void startEngine() {
+        System.out.println("Car");
+        
+        super.startEngine();
+        
+        this.helperMethod();
+    }
+    
+    void helperMethod() {
+        System.out.println("Car is ready ");
+    }
+}
+class Bike extends Vehicle {
+    
+    void startEngine() {
+        System.out.println("Bike engine ");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car v1 = new Car();
+        v1.startEngine();
+        
+        System.out.println();
+        
+        Bike v2 = new Bike();
+        v2.startEngine();
+    }
+}
+
+/* 2. Design a BankAccount base class with method getBalance().
+ Subclasses SavingsAccount and CurrentAccount override it with different rules.
+  Use this() for constructor chaining and super() to invoke the parent constructor.
+*/
+class BankAccount {
+
+    public BankAccount() {
+        System.out.println("BankAccount Constructor");
+    }
+    void getBalance() {
+        System.out.println("Balance");
+    }
+}
+
+class SavingsAccount extends BankAccount {
+
+    SavingsAccount() {
+        super(); 
+        System.out.println("SavingsAccount Constructor");
+    }
+
+    void getBalance() {
+        System.out.println("SavingsAccount Balance ");
+    }
+}
+
+class CurrentAccount extends BankAccount {
+
+    CurrentAccount() {
+        this("Current Account"); 
+        System.out.println("CurrentAccount Constructor");
+    }
+
+    CurrentAccount(String msg) {
+        super(); 
+        System.out.println("CurrentAccount Constructor: " + msg);
+    }
+
+    void getBalance() {
+        System.out.println("CurrentAccount Balance");
+    }
+}
+
+class Two {
+    public static void main(String[] args) {
+        SavingsAccount s = new SavingsAccount();
+        s.getBalance();
+
+        CurrentAccount c = new CurrentAccount();
+        c.getBalance();
+    }
+}
+
+/*3. Implement a Shape base class with abstract method area().
+ Create subclasses Circle, Rectangle, and Triangle. 
+ Use constructor chaining with this() and super() to initialize values.
+ */
+class Shape {
+    double area;
+    Shape() {
+        System.out.println("Shape constructor ");
+    }
+    void area() {
+        System.out.println("Shape area");
+    }
+}
+class Circle extends Shape {
+    double radius;
+
+    Circle() {
+        this(1.0);
+        System.out.println("Circle constructor");
+    }
+
+    Circle(double radius) {
+        super();
+        this.radius = radius;
+        System.out.println("Circle constructor, radius = " + radius);
+    }
+
+    void area() {
+        area = 3.14 * radius * radius;
+        System.out.println("Circle area = " + area);
+    }
+}
+class Rectangle extends Shape {
+    double length, breadth;
+
+    Rectangle() {
+        this(1.0, 1.0);
+        System.out.println("Rectangle constructor");
+    }
+
+    Rectangle(double length, double breadth) {
+        super();
+        this.length = length;
+        this.breadth = breadth;
+        System.out.println("Rectangle constructor: " + length + " * " + breadth);
+    }
+
+    void area() {
+        area = length * breadth;
+        System.out.println("Rectangle area = " + area);
+    }
+}
+
+class Triangle extends Shape {
+    double base, height;
+
+    Triangle() {
+        this(1.0, 1.0);
+        System.out.println("Triangle constructor");
+    }
+
+    Triangle(double base, double height) {
+        super();
+        this.base = base;
+        this.height = height;
+        System.out.println("Triangle constructor: base = " + base + ", height = " + height);
+    }
+
+    void area() {
+        area = 0.5 * base * height;
+        System.out.println("Triangle area = " + area);
+    }
+}
+
+public class Three {
+    public static void main(String[] args) {
+        Circle c = new Circle(5);
+        c.area();
+
+        Rectangle r = new Rectangle(4, 6);
+        r.area();
+
+        Triangle t = new Triangle(3, 7);
+        t.area();
+    }
+}
+/*
+4. Build a class Person with fields name and age. 
+Extend it into Employee, then into Manager. 
+Shadow fields in the child classes and use both this and super
+ to resolve conflicts.
+*/
+class Person {
+    String name = "VAishnavi";
+    int age = 21;
+}
+
+class Employee extends Person {
+    String name = "Atul";  
+      int age = 25;                   
+
+    void display() {
+        System.out.println("Employee ");
+        System.out.println("name = " + this.name);    
+        System.out.println("name = " + super.name);   
+        System.out.println("age = " + this.age);
+        System.out.println("age = " + super.age);
+    }
+}
+
+class Manager extends Employee {
+    String name = " Amar"; 
+    int age = 40;                  
+
+    void display() {
+        System.out.println("Manager ");
+        System.out.println("name = " + this.name);       
+        System.out.println("name = " + super.name);     
+        System.out.println("age = " + this.age);
+        System.out.println("age = " + super.age);
+    }
+}
+
+public class Four {
+    public static void main(String[] args) {
+        Employee e = new Employee();
+        e.display();
+
+        System.out.println();
+
+        Manager m = new Manager();
+        m.display();
+    }
+}
+
+/*  5. Create an Animal hierarchy where Dog overrides makeSound() 
+and inside that method also calls parent’s makeSound() using super.
+ Demonstrate how overriding works.
+*/
+class Animal {
+    void display() {
+        System.out.println("Animal Class");
+    }
+
+    void makeSound() {
+        System.out.println("Animal sound");
+    }
+}
+class Dog extends Animal {
+    void makeSound() {
+        super.makeSound();
+        System.out.println("Dog barks");
+    }
+}
+public class Five {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.makeSound();  
+        d.display();
+    }
+}
+/* 6. Write a program where University is extended by College, and College is extended by Department.
+ Override a method info() at each level, and inside each override call the immediate parent’s version using super.
+  */
+class University {
+    void info() {
+        System.out.println("University Name: Sant Gadge Baba University");
+    }
+}
+class College extends University {
+    void info() {
+        super.info(); 
+        System.out.println("College Name: Sipna College");
+    }
+}
+class Department extends College {
+    void info() {
+        super.info(); 
+        System.out.println("Department Name: Computer Science Department");
+    }
+}
+class Six {
+    public static void main(String[] args) {
+        Department d = new Department();
+        d.info();
+    }
+}
+/*7. In Parent and Child classes, declare the same variable value. In child methods, use this.value and super.value to 
+show how they differ.
+*/
+class Parent {
+    int i=10;
+}
+class Child extends Parent{
+    int i=5;
+    void show(){
+         System.out.println("VAlue of i is : "+(this.i));
+         System.out.println("VAlue of i is : "+(super.i));
+    } 
+}
+class Seven{
+      public static void main(String[] args) {
+        Child c = new Child();
+        c.show();
+    }
+
+}
+/*  
+8. Design a LibraryItem base class. Extend it into Book and Magazine,
+overriding a method displayDetails(). Use super in overridden methods 
+to include parent details before adding child details.
+*/
+class LibraryItem {
+    String title;
+    String author;
+
+    LibraryItem(String title, String author) {
+        this.title = title;
+        this.author = author;
+    }
+    void displayDetails() {
+        System.out.println("Title: " + title);
+        System.out.println("Author: " + author);
+    }
+}
+class Book extends LibraryItem {
+    int pages;
+
+    Book(String title, String author, int pages) {
+        super(title, author);
+        this.pages = pages;
+    }
+
+    void displayDetails() {
+        super.displayDetails();   
+        System.out.println("Pages: " + pages);
+    }
+}
+class Magazine extends LibraryItem {
+    int issueNumber;
+
+    Magazine(String title, String author, int issueNumber) {
+        super(title, author);
+        this.issueNumber = issueNumber;
+    }
+    void displayDetails() {
+        super.displayDetails();   
+        System.out.println("Issue Number: " + issueNumber);
+    }
+}
+
+public class Eight {
+    public static void main(String[] args) {
+        Book b = new Book("Java Programming", "James Gosling", 500);
+        Magazine m = new Magazine("Tech Monthly", "Editorial Team", 42);
+
+        System.out.println("---- Book Details ----");
+        b.displayDetails();
+
+        System.out.println("\n---- Magazine Details ----");
+        m.displayDetails();
+    }
+}
+
+/*  
+9. Create an Employee class with overloaded constructors.
+Use this() to avoid duplication. 
+Extend into Manager and call parent constructor with super().
+Override calculateSalary() in child.
+*/
+class Employee {
+    String name;
+    double baseSalary;
+
+    Employee() {
+        this("name", 0.0); 
+    }
+
+    Employee(String name, double baseSalary) {
+        this.name = name;
+        this.baseSalary = baseSalary;
+    }
+
+    void calculateSalary() {
+        System.out.println("Employee salary = " + baseSalary);
+    }
+}
+
+class Manager extends Employee {
+    double bonus;
+
+    Manager(String name, double baseSalary, double bonus) {
+        super(name, baseSalary); 
+        this.bonus = bonus;
+    }
+
+    void calculateSalary() {
+        System.out.println("Manager salary = " + (baseSalary + bonus));
+    }
+}
+
+public class Nine {
+    public static void main(String[] args) {
+        Employee e = new Employee("Ravi", 30000);
+        e.calculateSalary();
+
+        Manager m = new Manager("Vaishnavi", 50000, 10000);
+        m.calculateSalary();
+    }
+}
+/*10. Write a base class Appliance with method turnOn().
+ Extend into Fan and Light. Override the method 
+ and inside child call the parent’s version with super.turnOn().
+ */
+class Appliance {
+    void turnOn() {
+        System.out.println("Turn on the button");
+    }
+}
+
+class Fan extends Appliance {
+    void turnOn() {
+        super.turnOn(); 
+        System.out.println("Turn on the Fan");
+    }
+}
+class Light extends Appliance {
+    void turnOn() {
+        super.turnOn(); 
+        System.out.println("Turn on the Light");
+    }
+}
+public class Ten {
+    public static void main(String[] args) {
+        Fan f = new Fan();
+        Light l = new Light();
+
+        System.out.println("---- Fan ----");
+        f.turnOn();
+
+        System.out.println("\n---- Light ----");
+        l.turnOn();
+    }
+}
+
+/*11. Create a Game class with method play(). 
+Subclasses Cricket, Football, and Chess override the method.
+Add extra behavior in Football using this.
+*/
+class Game {
+    void play() {
+        System.out.println("Play Games!");
+    }
+}
+
+class Cricket extends Game {
+    void play() {
+        System.out.println("Game: Cricket");
+    }
+}
+
+class Football extends Game {
+    void play() {
+        System.out.println("Game: Football");
+        this.showRules(); 
+    }
+
+    void showRules() {
+        System.out.println("Football Extra ");
+    }
+}
+
+class Chess extends Game {
+    void play() {
+        System.out.println("Game: Chess");
+    }
+}
+
+public class Eleven {
+    public static void main(String[] args) {
+        Game g1 = new Cricket();
+        Game g2 = new Football();
+        Game g3 = new Chess();
+
+        g1.play();
+        g2.play();
+        g3.play();
+    }
+}
+
+/*  
+12. Implement a Parent class with method showMessage().
+Override it in Child. From the child method, call both its own version 
+using this.showMessage() and parent’s version using super.showMessage().
+*/
+class Parent {
+    void showMessage() {
+        System.out.println("Parent");
+    }
+}
+
+class Child extends Parent {
+    void showMessage() {
+        System.out.println("Child");
+    }
+
+    void displayMessages() {
+        this.showMessage();
+        super.showMessage();
+    }
+}
+
+public class Twelve {
+    public static void main(String[] args) {
+        Child c = new Child();
+        c.displayMessages();
+    }
+}
+
+//13. Create a Product base class with method getPrice(). Extend into Electronics and Clothing. Each subclass should have its own implementation. Demonstrate method overriding without arrays.
+
+class Product {
+    void getPrice() {
+        System.out.println("Price = 15000");
+    }
+}
+
+class Electronics extends Product {
+    void getPrice() {
+        System.out.println("Electronics Price = 50000");
+    }
+    
+    void display() {
+        System.out.println("Electronic Appliance: Laptop");
+    }
+}
+
+class Clothing extends Product {
+    void getPrice() {
+        System.out.println("Clothing Price = 2000");
+    }
+    
+    void display() {
+        System.out.println("Clothes");
+    }
+}
+
+class Thirteen {
+    public static void main(String[] args) {
+        Electronics e = new Electronics();
+        e.display();
+        e.getPrice(); 
+
+        Clothing c = new Clothing();
+        c.display();
+        c.getPrice(); 
+    }
+}
+
+class Transport {
+    void capacity() {
+        System.out.println("General Transport Capacity");
+    }
+}
+
+class Bus extends Transport {
+    void capacity() {
+        super.capacity();   
+        System.out.println("Bus capacity: 50 passengers");
+    }
+}
+
+class Train extends Transport {
+    void capacity() {
+        super.capacity();   
+        System.out.println("Train capacity: 500 passengers");
+    }
+}
+
+class Fourteen {
+    public static void main(String[] args) {
+        Bus b = new Bus();
+        b.capacity();
+
+        Train t = new Train();
+        t.capacity();
+    }
+}
+/* 15. Implement a class Student with multiple constructors demonstrating chaining with this(). 
+Extend it into GraduateStudent and call parent’s constructor with super().
+*/
+class Student {
+    String name;
+    int age;
+    String course;
+
+    Student() {
+        this("Vaish", 21, "CSe");  
+    }
+
+    Student(String name, int age) {
+        this(name, age, "General");   
+    }
+
+    Student(String name, int age, String course) {
+        this.name = name;
+        this.age = age;
+        this.course = course;
+        System.out.println("Student Created: " + name + ", Age: " + age + ", Course: " + course);
+    }
+}
+
+class GraduateStudent extends Student {
+    String thesis;
+
+    GraduateStudent(String name, int age, String course, String thesis) {
+        super(name, age, course); 
+        this.thesis = thesis;
+        System.out.println("Graduate Student Thesis: " + thesis);
+    }
+}
+
+class Fifteen {
+    public static void main(String[] args) {
+        Student s1 = new Student();
+        Student s2 = new Student("Vaishnavi", 21);
+        Student s3 = new Student("Rohit", 22, "Computer Science");
+
+        GraduateStudent g1 = new GraduateStudent("Anita", 24, "AI", "Deep Learning in Healthcare");
+    }
+}
+/*16. Write an Animal base class with method eat(). Extend into Herbivore and Carnivore, each overriding the method differently. 
+Show use of super in one subclass.
+*/
+class Animal {
+    void eat() {
+        System.out.println("Animal eats food");
+    }
+}
+
+class Herbivore extends Animal {
+    void eat() {
+        super.eat();   
+        System.out.println("Herbivore eats plants");
+    }
+}
+
+class Carnivore extends Animal {
+    void eat() {
+        System.out.println("Carnivore eats meat");
+    }
+}
+
+class Sixteen {
+    public static void main(String[] args) {
+        Herbivore h = new Herbivore();
+        h.eat();
+
+        Carnivore c = new Carnivore();
+        c.eat();
+    }
+}
+/* 17. Create a Bank base class with constructor.
+   Extend into SBI and HDFC. Override a method loanDetails().
+   In child constructors, ensure super() is used to call parent constructor.
+*/
+class Bank {
+    Bank() {
+        System.out.println("Bank Detail");
+    }
+    void loanDetails() {
+        System.out.println("Loan");
+    }
+}
+class SBI extends Bank {
+    public SBI() {
+        super();  
+        System.out.println("SBI");
+    }
+    void loanDetails() {
+        super.loanDetails(); 
+        System.out.println("SBI Loan");
+    }
+}
+class HDFC extends Bank {
+    public HDFC() {
+        super();   
+        System.out.println("HDFC");
+    }
+    void loanDetails() {
+        super.loanDetails();
+        System.out.println("HDFC Loan");
+    }
+}
+class Seventeen {
+    public static void main(String[] args) {
+        SBI sbi = new SBI();
+        sbi.loanDetails();
+
+        HDFC hdfc = new HDFC();
+        hdfc.loanDetails();
+    }
+}
+/* 18. Create a Device class with method specs(). 
+   Extend it into Mobile and Laptop. 
+   Override the method and in Mobile, 
+   use this to call another method of the same class.
+*/
+class Device {
+    void specs() {
+        System.out.println("General Device Specs");
+    }
+}
+class Mobile extends Device {
+    void specs() {
+        System.out.println("Mobile Specs:");
+        this.showBattery(); 
+    }
+
+    void showBattery() {
+        System.out.println("Battery: 5000mAh");
+    }
+}
+
+class Laptop extends Device {
+    void specs() {
+        System.out.println("Laptop Specs:");
+        System.out.println("RAM: 16GB, Storage: 512GB SSD");
+    }
+}
+
+class Eighteen {
+    public static void main(String[] args) {
+        Device d1 = new Mobile();
+        d1.specs();
+
+        Device d2 = new Laptop();
+        d2.specs();
+    }
+}
+
+
+/*19. Write a company system with base class Company.
+ Extend it into ITCompany.
+ Use constructor parameters that shadow class fields, and resolve ambiguity using this.
+ Override a method to display company info.
+ */
+class Company {
+    String name;
+    String location;
+
+    public Company(String name, String location) {
+        this.name = name;     
+        this.location = location;
+    }
+
+    void displayInfo() {
+        System.out.println("Company Name: " + name);
+        System.out.println("Location: " + location);
+    }
+}
+
+class ITCompany extends Company {
+    String specialization;
+
+    public ITCompany(String name, String location, String specialization) {
+        super(name, location); 
+        this.specialization = specialization; 
+    }
+
+    void displayInfo() {
+        super.displayInfo(); 
+        System.out.println("Specialization: " + specialization);
+    }
+}
+class Nineteen {
+    public static void main(String[] args) {
+        ITCompany itc = new ITCompany("Wipro", "Bangalore", "Software Services");
+        itc.displayInfo();
+    }
+}
+/*20. Write a Parent class with a method display().
+ In Child, override it. 
+ Inside child, call its own version using this.display() 
+ and parent’s version using super.display().
+ */
+
+class Parent {
+    void display() {
+        System.out.println("Display from Parent class");
+    }
+}
+
+class Child extends Parent {
+    void display() {
+        System.out.println("Display from Child class");
+
+        System.out.println("Calling with this:");
+        this.displayChildOnly();
+
+        System.out.println("Calling with super:");
+        super.display();
+    }
+
+    void displayChildOnly() {
+        System.out.println("This is Child’s own method (via this)");
+    }
+}
+
+class Twenty {
+    public static void main(String[] args) {
+        Child obj = new Child();
+        obj.display();
+    }
+}
+
+/*21. Create a Shape base class with method draw().
+ Extend into Circle and Square, overriding the method.
+ Ensure constructors in child classes call the parent’s constructor with super().
+ */
+class Shape {
+    String color;
+    public Shape(String color) {
+        this.color = color;
+        System.out.println("Shape constructor called");
+    }
+    void draw() {
+        System.out.println("Drawing a generic shape");
+    }
+}
+class Circle extends Shape {
+    double radius;
+    public Circle(String color, double radius) {
+        super(color); 
+        this.radius = radius;
+        System.out.println("Circle constructor called");
+    }
+    void draw() {
+        System.out.println("Drawing a Circle of color " + color + " with radius " + radius);
+    }
+}
+class Square extends Shape {
+    double side;
+    public Square(String color, double side) {
+        super(color); 
+        this.side = side;
+        System.out.println("Square constructor called");
+    }
+    void draw() {
+        System.out.println("Drawing a Square of color " + color + " with side " + side);
+    }
+}
+class TwentyOne {
+    public static void main(String[] args) {
+        Shape c = new Circle("Red", 5.0);
+        c.draw();
+
+        System.out.println();
+
+        Shape s = new Square("Blue", 4.0);
+        s.draw();
+    }
+}
+
+/*22. Build a Music system where base class Music has play().
+ Extend into Classical and Rock. 
+ In Rock, call parent’s play() with super before adding extra logic.
+ */
+
+class Music {
+    void play() {
+        System.out.println("Playing music");
+    }
+}
+
+class Classical extends Music {
+    void play() {
+        System.out.println("Playing Classical Music");
+    }
+}
+
+class Rock extends Music {
+    void play() {
+        super.play();
+        System.out.println("Playing Rock Music");
+    }
+}
+
+class TwentyTwo {
+    public static void main(String[] args) {
+        Music m1 = new Classical();
+        m1.play();
+
+        System.out.println();
+
+        Music m2 = new Rock();
+        m2.play();
+    }
+}
+/*23. Create a Vehicle hierarchy. 
+ Ensure the Car constructor calls the parent constructor with super(), 
+ and also demonstrates constructor chaining with this().
+ */
+
+class Vehicle {
+    String brand;
+
+    public Vehicle(String brand) {
+        this.brand = brand;
+        System.out.println("Vehicle constructor called: " + brand);
+    }
+}
+
+class Car extends Vehicle {
+    String model;
+    int year;
+
+    public Car(String brand, String model) {
+        this(brand, model, 2025); 
+        System.out.println("Car constructor with brand & model called");
+    }
+
+    public Car(String brand, String model, int year) {
+        super(brand); 
+        this.model = model;
+        this.year = year;
+        System.out.println("Car constructor with brand, model & year called");
+    }
+
+    void displayInfo() {
+        System.out.println("Brand: " + brand + ", Model: " + model + ", Year: " + year);
+    }
+}
+
+class TwentyThree {
+    public static void main(String[] args) {
+        Car c1 = new Car("Toyota", "Corolla");
+        c1.displayInfo();
+
+        System.out.println();
+
+        Car c2 = new Car("Honda", "Civic", 2022);
+        c2.displayInfo();
+    }
+}
+/*24. Implement a Parent class with a parameterized constructor.
+ Subclass Child should call it using super() and also call one of its own methods with this.
+ */
+
+class Parent {
+    Parent(int n) {
+        System.out.println("Parent constructor called with value: " + n);
+    }
+}
+
+class Child extends Parent {
+    String name;
+
+    Child(int n, String name) {
+        super(n); 
+        this.name = name;
+
+        this.showName();
+    }
+
+    void showName() {
+        System.out.println(" name is: " + name);
+    }
+}
+
+class TwentyFour {
+    public static void main(String[] args) {
+        Child c = new Child(100, "Vaishnavi");
+    }
+}
+
+/*25. Create a Payment base class with pay() method. Subclasses CreditCard and UPI override it. Show overriding behavior and explicitly call parent’s pay() inside one of the subclasses.*/
+class Payment {
+    void pay(double amount) {
+        System.out.println("Processing generic payment of ₹" + amount);
+    }
+}
+class CreditCard extends Payment {
+    void pay(double amount) {
+        super.pay(amount);
+        System.out.println("Paid ₹" + amount + " using Credit Card.");
+    }
+}
+class UPI extends Payment {
+    void pay(double amount) {
+        System.out.println("Paid ₹" + amount + " using UPI.");
+    }
+}
+class TwentyFive {
+    public static void main(String[] args) {
+        Payment p1 = new CreditCard();
+        p1.pay(2500.50);
+
+        System.out.println();
+
+        Payment p2 = new UPI();
+        p2.pay(999.99);
+    }
+}
+/*26. Write a Person base class with method details(). Extend into Student and Teacher, each overriding it differently. Demonstrate method overriding with super.details() in one class.
+ */
+class Person {
+    String name;
+    int age;
+    Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    void details() {
+        System.out.println("Name: " + name + ", Age: " + age);
+    }
+}
+
+class Student extends Person {
+    String course;
+
+    Student(String name, int age, String course) {
+        super(name, age);
+        this.course = course;
+    }
+    void details() {
+        super.details(); 
+        System.out.println("Course: " + course);
+    }
+}
+
+class Teacher extends Person {
+    String subject;
+
+    Teacher(String name, int age, String subject) {
+        super(name, age);
+        this.subject = subject;
+    }
+
+    void details() {
+        System.out.println("Teacher: " + name + ", Subject: " + subject);
+    }
+}
+
+class TwentySix {
+    public static void main(String[] args) {
+        Student s = new Student("Aarav", 20, "Computer Science");
+        s.details();
+
+        System.out.println();
+
+        Teacher t = new Teacher("Meera", 35, "Mathematics");
+        t.details();
+    }
+}
+/* 28. Implement a Shape base class. 
+Extend into Circle and Rectangle. Ensure that child constructors use super() for initialization.
+ Override area() differently in each subclass.
+ */
+class Shape {
+    String color;
+
+    Shape(String color) {
+        this.color = color;
+    }
+    double area() {
+        return 0; 
+    }
+}
+
+class Circle extends Shape {
+    double radius;
+
+    Circle(String color, double radius) {
+        super(color);
+        this.radius = radius;
+    }
+    double area() {
+        return Math.PI * radius * radius;
+    }
+}
+
+class Rectangle extends Shape {
+    double length, width;
+
+    Rectangle(String color, double length, double width) {
+        super(color);
+        this.length = length;
+        this.width = width;
+    }
+
+    double area() {
+        return length * width;
+    }
+}
+
+class TwentyEight {
+    public static void main(String[] args) {
+        Shape c = new Circle("Red", 7);
+        System.out.println("Circle area: " + c.area());
+
+        Shape r = new Rectangle("Blue", 5, 3);
+        System.out.println("Rectangle area: " + r.area());
+    }
+}
+/*  29. Write a program where both parent and child declare the same field name. Demonstrate this.name for the child field and super.name for the parent field.
+*/
+class Parent {
+    String name = "ParentName";
+}
+
+class Child extends Parent {
+    String name = "ChildName";
+
+    void showNames() {
+        System.out.println("Child name (this): " + this.name);
+        System.out.println("Parent name (super): " + super.name);
+    }
+}
+
+class TwentyNine {
+    public static void main(String[] args) {
+        Child c = new Child();
+        c.showNames();
+    }
+}
+/*30. Create a Media base class with method play(). Extend into Audio and Video. Override the method and in Video, call parent’s version with super.play().
+*/
+class Media {
+    void play() {
+        System.out.println("Playing media");
+    }
+}
+
+class Audio extends Media {
+    void play() {
+        System.out.println("Playing audio");
+    }
+}
+
+class Video extends Media {
+    void play() {
+        super.play(); 
+        System.out.println("Playing video ");
+    }
+}
+
+class Thirty {
+    public static void main(String[] args) {
+        Media m1 = new Audio();
+        m1.play();
+
+        System.out.println();
+
+        Media m2 = new Video();
+        m2.play();
+    }
+}
+/* 31. Design an Account base class with constructors. Extend into SavingsAccount and CurrentAccount. Use super() in constructors. Override calculateInterest() in child classes.
+ */
+ class Account {
+    String accNo;
+    double balance;
+    Account(String accNo, double balance) {
+        this.accNo = accNo;
+        this.balance = balance;
+        System.out.println("Account created: " + accNo);
+    }
+    double calculateInterest() {
+        return 0;
+    }
+}
+class SavingsAccount extends Account {
+    double rate;
+    SavingsAccount(String accNo, double balance, double rate) {
+        super(accNo, balance);
+        this.rate = rate;
+    }
+    double calculateInterest() {
+        return balance * rate / 100;
+    }
+}
+class CurrentAccount extends Account {
+    double overdraftLimit;
+    CurrentAccount(String accNo, double balance, double overdraftLimit) {
+        super(accNo, balance);
+        this.overdraftLimit = overdraftLimit;
+    }
+    double calculateInterest() {
+        return balance * 0.02; 
+    }
+}
+class ThirtyOne {
+    public static void main(String[] args) {
+        SavingsAccount sa = new SavingsAccount("SA123", 10000, 5);
+        System.out.println("Savings Interest: " + sa.calculateInterest());
+
+        CurrentAccount ca = new CurrentAccount("CA456", 20000, 5000);
+        System.out.println("Current Interest: " + ca.calculateInterest());
+    }
+}
+/* 32. Write a Parent class with overloaded methods print(). Extend into Child and override one version. Inside child, explicitly call the parent version using super.print().
+ */
+ class Parent {
+    void print() {
+        System.out.println("Parent with no arguments");
+    }
+
+    void print(String msg) {
+        System.out.println("Parent print: " + msg);
+    }
+}
+
+class Child extends Parent {
+    void print() {
+        System.out.println("Child ");
+        super.print("Hello from Child to Parent");
+    }
+}
+class ThirtyTwo {
+    public static void main(String[] args) {
+        Child c = new Child();
+        c.print();       
+        c.print("Hi!"); 
+    }
+}
+
+/* 33. Create a Gadget base class with method features(). Extend into Mobile and Tablet. Override the method and in Tablet, use super.features() before adding extra details.
+ */
+class Gadget {
+    void features() {
+        System.out.println(" Gadget features");
+    }
+}
+
+class Mobile extends Gadget {
+    void features() {
+        System.out.println("Mobile features: Calling, Internet, Camera");
+    }
+}
+
+class Tablet extends Gadget {
+    void features() {
+        super.features();
+        System.out.println("Tablet features");
+    }
+}
+
+class ThirtyThree {
+    public static void main(String[] args) {
+        Mobile m = new Mobile();
+        m.features();
+
+        System.out.println();
+
+        Tablet t = new Tablet();
+        t.features();
+    }
+}
+/* 34. Implement a School base class with constructor. Extend into College. Demonstrate constructor chaining using both this() and super(). Override info() method.
+ */
+ class School {
+    String name;
+
+    School(String name) {
+        this.name = name;
+        System.out.println("School constructor called: " + name);
+    }
+
+    void info() {
+        System.out.println("School: " + name);
+    }
+}
+
+class College extends School {
+    String course;
+
+    College(String name) {
+        this(name, "General"); 
+    }
+
+    College(String name, String course) {
+        super(name); 
+        this.course = course;
+        System.out.println("College constructor: " + course);
+    }
+
+    void info() {
+        super.info();
+        System.out.println("College course: " + course);
+    }
+}
+
+class ThirtyFour {
+    public static void main(String[] args) {
+        College c = new College("Sipna College", "Engineering");
+        c.info();
+    }
+}
+/*  35. Write a program where Parent defines a method displayInfo(). In Child, override it but call parent’s version using super.displayInfo() before adding child logic.
+*/
+
+class Parent35 {
+    void displayInfo() {
+        System.out.println("Parent Information");
+    }
+}
+class Child35 extends Parent35 {
+    void displayInfo() {
+        super.displayInfo(); 
+        System.out.println("Child Information ");
+    }
+}
+class ThirtyFive {
+    public static void main(String[] args) {
+        Child35 c = new Child35();
+        c.displayInfo();
+    }
+}
+/* 36. Build a Vehicle base class. Extend into Car and Bike. Override a method details(). In Car, use this to call another method and super to call parent’s method.
+*/
+class Vehicle {
+    void details() {
+        System.out.println("Vehicle details");
+    }
+}
+class Car extends Vehicle {
+    void details() {
+        super.details();
+        this.showCarFeature(); 
+    }
+    void showCarFeature() {
+        System.out.println("Car has 4 wheels ");
+    }
+}
+class Bike extends Vehicle {
+    void details() {
+        System.out.println("Bike has 2 wheels");
+    }
+}
+
+class ThirtySix {
+    public static void main(String[] args) {
+        Car c = new Car();
+        c.details();
+
+        System.out.println();
+
+        Bike b = new Bike();
+        b.details();
+    }
+}
+/* 37. Create a Shape base class with a default constructor. Extend into Circle and ensure parent’s constructor is called using super(). Override draw() in the child.
+ */
+ class Shape {
+    Shape() {
+        System.out.println("Shape constructor called");
+    }
+
+    void draw() {
+        System.out.println("Drawing a shape");
+    }
+}
+
+class Circle extends Shape {
+    Circle() {
+        super(); 
+        System.out.println("Circle constructor called");
+    }
+
+    void draw() {
+        System.out.println("Drawing a Circle");
+    }
+}
+
+class ThirtySeven {
+    public static void main(String[] args) {
+        Circle c = new Circle();
+        c.draw();
+    }
+}
+/* 38. Implement a class where this is used to return the current object for method chaining. Extend into a subclass and use super() in the subclass constructor.
+*/
+class Chain {
+    String name;
+
+    Chain setName(String name) {
+        this.name = name;
+        return this; 
+    }
+
+    Chain printName() {
+        System.out.println("Name: " + name);
+        return this;
+    }
+}
+
+class SubChain extends Chain {
+    int id;
+
+    SubChain(int id) {
+        super(); 
+        this.id = id;
+    }
+
+    SubChain setName(String name) {
+        super.setName(name);
+        return this;
+    }
+
+    @Override
+    SubChain printName() {
+        super.printName();
+        return this;
+    }
+
+    SubChain printId() {
+        System.out.println("ID: " + id);
+        return this;
+    }
+}
+
+class ThirtyEight {
+    public static void main(String[] args) {
+        new SubChain(101).setName("Chained Object").printName().printId();
+
+        SubChain sc = new SubChain(202);
+        sc.setName("Another").printName().printId();
+    }
+}
+/*39. Demonstrate hybrid inheritance using interfaces and base class. Show how super is used to call parent class methods while implementing interface behavior separately.
+ */
+class Animal {
+    void eat() {
+        System.out.println("Animal is eating");
+    }
+}
+interface Pet {
+    void play();
+}
+interface Wild {
+    void hunt();
+}
+class Dog extends Animal implements Pet {
+    @Override
+    public void play() {
+        System.out.println("Dog is playing fetch");
+    }
+
+    void showBehavior() {
+        super.eat(); 
+        play();
+    }
+}
+class Tiger extends Animal implements Wild {
+    public void hunt() {
+        System.out.println("Tiger is hunting");
+    }
+}
+class ThirtyNine {
+    public static void main(String[] args) {
+        Dog d = new Dog();
+        d.showBehavior();
+
+        System.out.println();
+
+        Tiger t = new Tiger();
+        t.hunt();
+        t.eat();
+    }
+}
+
+/* 40. Override toString() in both Parent and Child. 
+In the child’s toString(), call super.toString() to include parent details, then append child-specific details.
+*/
+class Parent40 {
+    String name;
+
+    Parent40(String name) {
+        this.name = name;
+    }
+
+    public String toString() {
+        return "Parent Name: " + name;
+    }
+}
+
+class Child40 extends Parent40 {
+    int age;
+
+    Child40(String name, int age) {
+        super(name);
+        this.age = age;
+    }
+
+    public String toString() {
+        return super.toString() + ", Child Age: " + age;
+    }
+}
+
+class Forty {
+    public static void main(String[] args) {
+        Parent40 p = new Parent40("Ramesh");
+        System.out.println(p);
+
+        Child40 c = new Child40("Suresh", 18);
+        System.out.println(c);
+    }
+}
+
+
+
+
+
+
